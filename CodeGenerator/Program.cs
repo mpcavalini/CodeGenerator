@@ -72,11 +72,11 @@ namespace CodeGenerator
                 {
                     sw.WriteLine("using MyGrade.Core.Domain.Base;");
                     sw.WriteLine($"namespace {myNamespace}");
+                    sw.WriteLine("{");
+                    sw.WriteLine($"\tpublic class {myClass} : BaseName");
                     sw.WriteLine("\t{");
-                    sw.WriteLine($"\t\tpublic class {myClass} : BaseName");
-                    sw.WriteLine("\t\t{");
-                    sw.WriteLine("\t\t}");
                     sw.WriteLine("\t}");
+                    sw.WriteLine("}");
                 }
             }
             Console.WriteLine($"{myClass} Domain created");
@@ -99,11 +99,11 @@ namespace CodeGenerator
                 {
                     sw.WriteLine($"using {setNameSpace("Core.Domain")};");
                     sw.WriteLine($"namespace {myNamespace}");
+                    sw.WriteLine("{");
+                    sw.WriteLine($"\tpublic interface I{myClass}Repository : IRepository<{myClass}>");
                     sw.WriteLine("\t{");
-                    sw.WriteLine($"\t\tpublic interface I{myClass}Repository : IRepository<{myClass}>");
-                    sw.WriteLine("\t\t{");
-                    sw.WriteLine("\t\t}");
                     sw.WriteLine("\t}");
+                    sw.WriteLine("}");
                 }
             }
             Console.WriteLine($"{myClass} RepositoryInterface created");
@@ -127,14 +127,14 @@ namespace CodeGenerator
                     sw.WriteLine($"using {setNameSpace("Core.Domain")};");
                     sw.WriteLine($"using System.Data.Entity.ModelConfiguration;");
                     sw.WriteLine($"namespace {myNamespace}");
+                    sw.WriteLine("{");
+                    sw.WriteLine($"\tpublic class {myClass}Configuration : EntityTypeConfiguration<{myClass}>");
                     sw.WriteLine("\t{");
-                    sw.WriteLine($"\t\tpublic class {myClass}Configuration : EntityTypeConfiguration<{myClass}>");
+                    sw.WriteLine($"\t\tpublic {myClass}Configuration()");
                     sw.WriteLine("\t\t{");
-                    sw.WriteLine($"\t\t\tpublic {myClass}Configuration()");
-                    sw.WriteLine("\t\t\t{");
-                    sw.WriteLine("\t\t\t}");
                     sw.WriteLine("\t\t}");
                     sw.WriteLine("\t}");
+                    sw.WriteLine("}");
                 }
             }
             Console.WriteLine($"{myClass} EntityConfiguration created");
@@ -160,18 +160,18 @@ namespace CodeGenerator
                     sw.WriteLine($"using System.Data.Entity;");
                     sw.WriteLine($"using System.Linq;");
                     sw.WriteLine($"namespace {myNamespace}");
+                    sw.WriteLine("{");
+                    sw.WriteLine($"\tpublic class {myClass}Repository : Repository<{myClass}>, I{myClass}Repository");
                     sw.WriteLine("\t{");
-                    sw.WriteLine($"\t\tpublic class {myClass}Repository : Repository<{myClass}>, I{myClass}Repository");
+                    sw.WriteLine($"\t\tpublic {myClass}Repository(PlutoContext context) : base(context)");
                     sw.WriteLine("\t\t{");
-                    sw.WriteLine($"\t\t\tpublic {myClass}Repository(PlutoContext context) : base(context)");
-                    sw.WriteLine("\t\t\t{");
-                    sw.WriteLine("\t\t\t}");
-                    sw.WriteLine($"\t\t\tpublic PlutoContext PlutoContext");
-                    sw.WriteLine("\t\t\t{");
-                    sw.WriteLine("\t\t\t\tget { return Context as PlutoContext; }");
-                    sw.WriteLine("\t\t\t}");
+                    sw.WriteLine("\t\t}");
+                    sw.WriteLine($"\t\tpublic PlutoContext PlutoContext");
+                    sw.WriteLine("\t\t{");
+                    sw.WriteLine("\t\t\tget { return Context as PlutoContext; }");
                     sw.WriteLine("\t\t}");
                     sw.WriteLine("\t}");
+                    sw.WriteLine("}");
                 }
             }
             Console.WriteLine($"{myClass} Repository created");
